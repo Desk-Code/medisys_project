@@ -1,8 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:medisys/Presentation/boarding_screen/boarding_page.dart';
+import 'package:medisys/Presentation/splash_screen/splash_screen.dart';
 import 'package:medisys/Util/constraint.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: ConstraintData.bgAppBarColor),
         useMaterial3: true,
       ),
-      home: const BoardingPage(),
+      home: const SplashScreenPage(),
       // home: const HospitalLoginScreen(),
     );
   }

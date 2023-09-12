@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21308128538",
+    "project_id": "medisys-509c1",
+    "storage_bucket": "medisys-509c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21308128538:android:b13b0af1b1bd30df8dc0a3",
+        "android_client_info": {
+          "package_name": "com.example.medisys"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxTR4M0fLQLjbP2QRsu78anfuH2PpIZnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
