@@ -56,4 +56,7 @@ class ConstraintData {
   // 3. Hospital Side
 
   static const String hospitalLogin = "Hospital Login";
+  static const String notHaveAccount = "Don't have an Account ?";
+
+  static const String register = "Register";
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medisys/Presentation/splash_screen/splash_screen.dart';
+import 'package:medisys/Presentation/boarding_screen/boarding_page.dart';
 import 'package:medisys/Util/constraint.dart';
 
 void main() {
@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: ConstraintData.bgAppBarColor),
         useMaterial3: true,
       ),
-      // home: const BoardingPage(),
-      home: const SplashScreenPage(),
+      home: const BoardingPage(),
+      // home: const HospitalLoginScreen(),
     );
   }
 }

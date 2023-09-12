@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
-import 'package:medisys/Util/constraint.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/boarding_screen/boarding_page.dart';
+import 'package:medisys/Util/constraint.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({super.key});

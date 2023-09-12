@@ -17,6 +17,7 @@ class _PatientOtpScreenState extends State<PatientOtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ConstraintData.bgColor,
         appBar: AppBar(
           backgroundColor: ConstraintData.bgAppBarColor,
           leading: IconButton(

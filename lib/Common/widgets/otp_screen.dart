@@ -67,12 +67,17 @@ Widget otpScreen(
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              Text(
-                ConstraintData.otpResend,
-                style: GoogleFonts.lato(
-                  color: Colors.redAccent,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  ConstraintData.otpResend,
+                  style: GoogleFonts.lato(
+                    color: Colors.redAccent,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

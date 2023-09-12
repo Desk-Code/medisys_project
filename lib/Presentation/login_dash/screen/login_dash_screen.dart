@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Presentation/Presentation_Doctor/Doctor_Login/doctor_login_screen.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Hospital_Login/hospital_login_screen.dart';
 import 'package:medisys/Presentation/Presentation_Patient/Patient_Login/patient_login_screen.dart';
 import 'package:medisys/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:medisys/Presentation/login_dash/widgets/login_info.dart';
@@ -77,7 +78,14 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
           loginDash(
             context: context,
             nameOfLogin: ConstraintData.hospitalLogin,
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HospitalLoginScreen(),
+                ),
+              );
+            },
           ),
         ],
       ),
