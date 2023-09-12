@@ -6,14 +6,14 @@ import 'package:medisys/Common/widgets/common_value.dart';
 import 'package:medisys/Common/widgets/otp_screen.dart';
 import 'package:medisys/Util/constraint.dart';
 
-class PatientOtpScreen extends StatefulWidget {
-  const PatientOtpScreen({super.key});
+class DoctorOtpScreen extends StatefulWidget {
+  const DoctorOtpScreen({super.key});
 
   @override
-  State<PatientOtpScreen> createState() => _PatientOtpScreenState();
+  State<DoctorOtpScreen> createState() => _DoctorOtpScreenState();
 }
 
-class _PatientOtpScreenState extends State<PatientOtpScreen> {
+class _DoctorOtpScreenState extends State<DoctorOtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
