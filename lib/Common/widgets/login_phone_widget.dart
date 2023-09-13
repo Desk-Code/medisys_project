@@ -18,7 +18,7 @@ Widget loginPhoneWidget({
           top: 5,
           right: 5,
         ),
-        height: context.screenHeight * 0.22,
+        height: context.screenHeight * 0.23,
         width: context.screenWidth * 0.9,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(9),
@@ -35,7 +35,7 @@ Widget loginPhoneWidget({
                 initialCountryCode: 'IN',
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  CommonValue.phNumberValue = value.number;
+                  CommonValue.phNumberValue = value.completeNumber;
                 },
               ),
               const SizedBox(

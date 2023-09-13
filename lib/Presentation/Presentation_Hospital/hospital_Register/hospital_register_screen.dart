@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medisys/Data/firebase/firebase_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/hospital_Register/controller/hospital_registration.controller.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/hospital_Register/widgets/text_form_field.dart';
@@ -90,7 +91,19 @@ class _HospitalRegisterScreenState extends State<HospitalRegisterScreen> {
                 obscureText: true,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  await FirebaseApi.setUserData(
+                    hospName: RegController.txtRegController[0].text,
+                    mobNum: RegController.txtRegController[1].text,
+                    email: RegController.txtRegController[2].text,
+                    address: RegController.txtRegController[3].text,
+                    upiId: RegController.txtRegController[4].text,
+                    pass: RegController.txtRegController[5].text,
+                  ).then((value) {
+                    RegController.txtRegControllerClear;
+                    Navigator.pop(context);
+                  });
+                },
                 child: Container(
                   margin: const EdgeInsets.only(
                     left: 10,

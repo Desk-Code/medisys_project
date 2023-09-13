@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/common_value.dart';
 import 'package:medisys/Common/widgets/login_phone_widget.dart';
+import 'package:medisys/Data/firebase/firebase_api_auth.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Patient/Patient_Otp/patient_otp_screen.dart';
 import 'package:medisys/Util/constraint.dart';
@@ -70,13 +71,12 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
             ),
             loginPhoneWidget(
               context: context,
-              onTap: () {
-                log(CommonValue.phNumberValue);
-                Navigator.push(
+              onTap: () async {
+                log(FirebaseApiAuth.firebaseVerificationId);
+                await FirebaseApiAuth.sendOtp(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const PatientOtpScreen(),
-                  ),
+                  phNumber: CommonValue.phNumberValue,
+                  toNavigate: (context) => const PatientOtpScreen(),
                 );
               },
             ),

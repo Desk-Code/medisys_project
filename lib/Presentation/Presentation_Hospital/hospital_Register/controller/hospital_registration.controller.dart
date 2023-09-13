@@ -27,4 +27,14 @@ class RegController {
         _txtPassController,
         _txtCPassController,
       ];
+
+  static get txtRegControllerClear => [
+        _txtNameController.clear(),
+        _txtMobNController.clear(),
+        _txtEmailController.clear(),
+        _txtAddController.clear(),
+        _txtUpiController.clear(),
+        _txtPassController.clear(),
+        _txtCPassController.clear(),
+      ];
 }

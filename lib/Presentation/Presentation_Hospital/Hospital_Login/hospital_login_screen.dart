@@ -1,9 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:medisys/Common/widgets/common_toast.dart';
 import 'package:medisys/Common/widgets/common_value.dart';
+import 'package:medisys/Data/firebase/firebase_api_auth.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Hospital_otp/hospital_otp_screen.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/hospital_Register/hospital_register_screen.dart';
@@ -17,8 +18,6 @@ class HospitalLoginScreen extends StatefulWidget {
 }
 
 class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,35 +84,19 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                         initialCountryCode: 'IN',
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
-                          CommonValue.phNumberValue = value.number;
+                          CommonValue.phNumberValue = value.completeNumber;
                         },
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          _auth.verifyPhoneNumber(
-                            timeout: const Duration(seconds: 30),
-                            phoneNumber: '+91${CommonValue.phNumberValue}',
-                            verificationCompleted: (phoneAuthCredential) {
-                              FlutterToast()
-                                  .showMessage('Verification completed');
-                            },
-                            verificationFailed: (error) {
-                              FlutterToast().showMessage(error.toString());
-                            },
-                            codeSent: (verificationId, forceResendingToken) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HospitalOtpScreen(
-                                    verificationId: verificationId,
-                                  ),
-                                ),
-                              );
-                            },
-                            codeAutoRetrievalTimeout: (verificationId) {},
+                        onTap: () async {
+                          log(FirebaseApiAuth.firebaseVerificationId);
+                          await FirebaseApiAuth.sendOtp(
+                            context,
+                            phNumber: CommonValue.phNumberValue,
+                            toNavigate: (context) => const HospitalOtpScreen(),
                           );
                         },
                         child: Container(
