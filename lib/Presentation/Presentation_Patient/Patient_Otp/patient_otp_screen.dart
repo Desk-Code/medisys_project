@@ -37,8 +37,8 @@ class _PatientOtpScreenState extends State<PatientOtpScreen> {
         ),
         body: otpScreen(
           context,
-          onTap: () async {
-            await FirebaseApiAuth.otpVerification(
+          onTap: () {
+            FirebaseApiAuth.otpVerification(
               context,
               toNaviagte: (context) => const SplashScreenPage(),
             );

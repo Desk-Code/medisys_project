@@ -12,8 +12,8 @@ class FirebaseApiAuth {
     required String phNumber,
     required Widget Function(BuildContext) toNavigate,
   }) async {
-    _auth.verifyPhoneNumber(
-      // timeout: const Duration(seconds: 30),
+    await _auth.verifyPhoneNumber(
+      timeout: const Duration(seconds: 30),
       phoneNumber: phNumber,
       verificationCompleted: (phoneAuthCredential) {
         FlutterToast().showMessage('Verification completed');
@@ -34,10 +34,10 @@ class FirebaseApiAuth {
     );
   }
 
-  static Future<void> otpVerification(
+  static void otpVerification(
     BuildContext context, {
     required Widget Function(BuildContext) toNaviagte,
-  }) async {
+  }) {
     AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: firebaseVerificationId,
       smsCode: CommonValue.otpPinValue,

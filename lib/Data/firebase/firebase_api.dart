@@ -22,4 +22,25 @@ class FirebaseApi {
       'pass': pass
     });
   }
+
+  static Future<bool> selectData(String phNumber) async {
+    Map data =
+        await db.once().then((value) => value.snapshot.value as Map? ?? {});
+
+    // for the fetching all data from the list
+    List<Map> userData = [];
+    data.forEach(
+      (key, value) {
+        userData.add(value);
+      },
+    );
+
+    // for the fetching ph number value
+    for (var element in userData) {
+      if (element['mobNum'] == phNumber) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

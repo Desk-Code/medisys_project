@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -18,6 +16,12 @@ class HospitalLoginScreen extends StatefulWidget {
 }
 
 class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
+  String inputedNumber = '';
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +89,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
                           CommonValue.phNumberValue = value.completeNumber;
+                          inputedNumber = value.number;
                         },
                       ),
                       const SizedBox(
@@ -92,12 +97,24 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          log(FirebaseApiAuth.firebaseVerificationId);
+                          // bool phNumberIsRegistrated =
+                          //     await FirebaseApi.selectData(inputedNumber);
+                          // if (phNumberIsRegistrated) {
                           await FirebaseApiAuth.sendOtp(
                             context,
                             phNumber: CommonValue.phNumberValue,
                             toNavigate: (context) => const HospitalOtpScreen(),
                           );
+                          // } else {
+                          //   FlutterToast()
+                          //       .showMessage("Your Data is Not Found !!!");
+                          // }
+                          // log(FirebaseApiAuth.firebaseVerificationId);
+                          // await FirebaseApiAuth.sendOtp(
+                          //   context,
+                          //   phNumber: CommonValue.phNumberValue,
+                          //   toNavigate: (context) => const HospitalOtpScreen(),
+                          // );
                         },
                         child: Container(
                           height: context.screenHeight * 0.06,

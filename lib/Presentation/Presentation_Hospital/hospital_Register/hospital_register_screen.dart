@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Data/firebase/firebase_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/hospital_Register/controller/hospital_registration.controller.dart';
-import 'package:medisys/Presentation/Presentation_Hospital/hospital_Register/widgets/text_form_field.dart';
+import 'package:medisys/Common/widgets/text_form_field.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class HospitalRegisterScreen extends StatefulWidget {

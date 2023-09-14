@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/otp_screen.dart';
 import 'package:medisys/Data/firebase/firebase_api_auth.dart';
-import 'package:medisys/Presentation/splash_screen/splash_screen.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/hospital_dashboard.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class HospitalOtpScreen extends StatefulWidget {
@@ -37,11 +37,12 @@ class _HospitalOtpScreenState extends State<HospitalOtpScreen> {
       ),
       body: otpScreen(
         context,
-        onTap: () async {
-          await FirebaseApiAuth.otpVerification(
+        onTap: () {
+          FirebaseApiAuth.otpVerification(
             context,
-            toNaviagte: (context) => const SplashScreenPage(),
+            toNaviagte: (context) => const HospitalDashBoard(),
           );
+
           // AuthCredential credential = PhoneAuthProvider.credential(
           //   verificationId: widget.verificationId,
           //   smsCode: CommonValue.otpPinValue,
