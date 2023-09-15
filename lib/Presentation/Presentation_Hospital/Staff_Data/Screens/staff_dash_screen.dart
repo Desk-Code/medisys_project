@@ -50,8 +50,9 @@ class _StaffDashScreenState extends State<StaffDashScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          StaffSearchPage(selectedStaff: index),
+                      builder: (context) => StaffSearchPage(
+                        selectedStaff: StaffDashController.staffField[index],
+                      ),
                     ),
                   );
                 },

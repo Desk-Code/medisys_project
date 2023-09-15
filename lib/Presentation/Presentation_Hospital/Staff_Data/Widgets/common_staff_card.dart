@@ -4,6 +4,9 @@ import 'package:medisys/Extention/build_context_extention.dart';
 Widget commonStaffCard(
   BuildContext context, {
   required String staffSection,
+  required String staffSectionkey,
+  required String staffName,
+  required String staffMobile,
 }) =>
     Card(
       margin: EdgeInsets.symmetric(
@@ -32,7 +35,7 @@ Widget commonStaffCard(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.person_pin_circle_outlined),
-                    Text("$staffSection key"),
+                    Text(staffSectionkey),
                   ],
                 ),
               ],
@@ -40,8 +43,8 @@ Widget commonStaffCard(
             const SizedBox(
               height: 10,
             ),
-            Text("$staffSection Name    : $staffSection Name"),
-            Text("$staffSection Mobile  : $staffSection Mobile"),
+            Text("$staffSection Name    : $staffName"),
+            Text("$staffSection Mobile  : $staffMobile"),
           ],
         ),
       ),

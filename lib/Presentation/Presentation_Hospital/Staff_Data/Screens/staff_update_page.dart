@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:medisys/Common/widgets/text_form_field.dart';
+import 'package:medisys/Data/firebase/staff/staff_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Staff_Data/Controller/staff_dash_controller.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Staff_Data/Screens/staff_search_data.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class StaffUpdatePage extends StatefulWidget {
-  const StaffUpdatePage({super.key});
+  const StaffUpdatePage(
+      {super.key, required this.selectedKey, required this.selectedStaff});
+  final String selectedKey;
+  final String selectedStaff;
 
   @override
   State<StaffUpdatePage> createState() => _StaffUpdatePageState();
@@ -73,9 +78,34 @@ class _StaffUpdatePageState extends State<StaffUpdatePage> {
                     ),
                   ),
                 ),
-                onPressed: () {
-                  StaffDashController.txtStaffClearController();
-                  Navigator.pop(context);
+                onPressed: () async {
+                  await StaffApi.staffupdateData(
+                          key: widget.selectedKey,
+                          fullName:
+                              StaffDashController.txtStaffController[0].text,
+                          mobileNumber:
+                              StaffDashController.txtStaffController[1].text,
+                          gender:
+                              StaffDashController.txtStaffController[2].text,
+                          age: StaffDashController.txtStaffController[3].text,
+                          aadharNumber:
+                              StaffDashController.txtStaffController[4].text,
+                          address:
+                              StaffDashController.txtStaffController[5].text)
+                      .then((value) =>
+                          StaffDashController.txtStaffClearController)
+                      .then((value) => Navigator.pop(context))
+                      .then(
+                        (value) => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StaffSearchPage(
+                              selectedStaff: widget.selectedStaff,
+                            ),
+                          ),
+                        ),
+                      );
+                  StaffDashController.txtStaffClearController;
                   setState(() {});
                 },
                 child: const Text("Update"),
