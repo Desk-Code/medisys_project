@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Bill_Data/Screens/bill_search_data.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/widgets/common_tile_dash.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/widgets/drawer_screen.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Doctor_data/Screens/doctor_search_page.dart';
@@ -112,7 +113,14 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
                 commonDash(
                   context,
                   data: "Bill",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BillSearchData(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

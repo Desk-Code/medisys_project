@@ -96,6 +96,23 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
           const SizedBox(
             height: 20,
           ),
+          ElevatedButton(
+            style: ButtonStyle(
+              minimumSize: MaterialStateProperty.all(
+                Size(
+                  context.screenWidth * 0.9,
+                  context.screenHeight * 0.06,
+                ),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Fire"),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );
