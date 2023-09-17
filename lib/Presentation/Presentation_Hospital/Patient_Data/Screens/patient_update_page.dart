@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:medisys/Common/widgets/text_form_field.dart';
+import 'package:medisys/Data/firebase/patient/patient_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Patient_Data/Controller/patient_add.controller.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Patient_Data/Screens/patient_search_page.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class PatientUpdatePage extends StatefulWidget {
-  const PatientUpdatePage({super.key});
+  const PatientUpdatePage({super.key, required this.selectedKey});
+  final String selectedKey;
 
   @override
   State<PatientUpdatePage> createState() => _PatientUpdatePageState();
@@ -74,16 +77,10 @@ class _PatientUpdatePageState extends State<PatientUpdatePage> {
                     PatientAddController.txtPatientAddController[7],
               ),
               commonTextFormField(
-                icon: Icons.date_range,
-                nameOfField: "Admit Date",
-                textEditingController:
-                    PatientAddController.txtPatientAddController[8],
-              ),
-              commonTextFormField(
                 icon: Icons.bed,
                 nameOfField: "Ward No.",
                 textEditingController:
-                    PatientAddController.txtPatientAddController[9],
+                    PatientAddController.txtPatientAddController[8],
               ),
               ElevatedButton(
                 style: ButtonStyle(
@@ -94,10 +91,36 @@ class _PatientUpdatePageState extends State<PatientUpdatePage> {
                     ),
                   ),
                 ),
-                onPressed: () {
-                  PatientAddController.txtPatientAddClearController();
-                  Navigator.pop(context);
-                  setState(() {});
+                onPressed: () async {
+                  await PatientApi.patientupdateData(
+                          key: widget.selectedKey,
+                          name: PatientAddController
+                              .txtPatientAddController[0].text,
+                          mobileNumber: PatientAddController
+                              .txtPatientAddController[1].text,
+                          gender: PatientAddController
+                              .txtPatientAddController[2].text,
+                          bloodGroup: PatientAddController
+                              .txtPatientAddController[3].text,
+                          age: PatientAddController
+                              .txtPatientAddController[4].text,
+                          relativeName: PatientAddController
+                              .txtPatientAddController[5].text,
+                          relationRelative: PatientAddController
+                              .txtPatientAddController[6].text,
+                          roomNo: PatientAddController
+                              .txtPatientAddController[7].text,
+                          wardNo: PatientAddController
+                              .txtPatientAddController[8].text)
+                      .then((value) {
+                    PatientAddController.txtPatientAddClearController;
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PatientSearchPage(),
+                        ));
+                  });
                 },
                 child: const Text("Update"),
               ),

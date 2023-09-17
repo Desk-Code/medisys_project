@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medisys/Common/widgets/text_search_field.dart';
+import 'package:lottie/lottie.dart';
+import 'package:medisys/Common/widgets/common_value.dart';
+import 'package:medisys/Data/firebase/patient/patient_api.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Bill_Data/Screens/bill_update_page.dart';
-import 'package:medisys/Presentation/Presentation_Hospital/Bill_Data/Widgets/bill_filtering.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Bill_Data/Widgets/common_bill_card.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/hospital_dashboard.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class BillSearchData extends StatefulWidget {
@@ -14,6 +16,21 @@ class BillSearchData extends StatefulWidget {
 }
 
 class _BillSearchDataState extends State<BillSearchData> {
+  late Future<List<Map>> futurePatientData;
+  late Future<List<Map>> futureSearchData;
+
+  @override
+  void initState() {
+    futurePatientData = PatientApi.fetchPatientRemainingBill();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    CommonValue.search = '';
+    super.dispose();
+  }
+
   final TextEditingController _txtSearchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +39,12 @@ class _BillSearchDataState extends State<BillSearchData> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HospitalDashBoard(),
+                ),
+                (route) => false);
           },
           icon: const Icon(Icons.arrow_back_rounded),
         ),
@@ -35,42 +57,91 @@ class _BillSearchDataState extends State<BillSearchData> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                enableDrag: true,
-                builder: (context) => billFiltering(context),
-              );
-            },
-            icon: const Icon(Icons.content_paste_search_rounded),
-          ),
-        ],
       ),
       body: Column(
         children: [
-          textSearchFeild(
-            controller: _txtSearchController,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 15,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BillUpdatePage(),
-                    ),
-                  );
-                },
-                child: commonBillCard(
-                  context,
-                  paymentIsDone: true,
+          Padding(
+            padding: const EdgeInsets.all(11.0),
+            child: TextField(
+              controller: _txtSearchController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
+                prefixIcon: const Icon(Icons.search),
               ),
+              onChanged: (value) {
+                CommonValue.search = value;
+                setState(() {});
+              },
             ),
+          ),
+          FutureBuilder(
+            future: futurePatientData,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      if (CommonValue.search.isEmpty) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BillUpdatePage(
+                                  selectedKey: snapshot.data![index]['key'],
+                                  currentAmt: snapshot.data![index]
+                                      ['payAmount'],
+                                ),
+                              ),
+                            );
+                          },
+                          child: commonBillCard(
+                            context,
+                            name: snapshot.data![index]['name'],
+                            mobileNumber: snapshot.data![index]['mobileNumber'],
+                            amt: snapshot.data![index]['payAmount'],
+                          ),
+                        );
+                      } else if (snapshot.data![index]['name']
+                          .toString()
+                          .toLowerCase()
+                          .contains(CommonValue.search.toLowerCase())) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BillUpdatePage(
+                                  selectedKey: snapshot.data![index]['key'],
+                                  currentAmt: snapshot.data![index]
+                                      ['payAmount'],
+                                ),
+                              ),
+                            );
+                          },
+                          child: commonBillCard(
+                            context,
+                            name: snapshot.data![index]['name'],
+                            mobileNumber: snapshot.data![index]['mobileNumber'],
+                            amt: snapshot.data![index]['payAmount'],
+                          ),
+                        );
+                      } else {
+                        return SingleChildScrollView(
+                            padding: const EdgeInsets.only(top: 70),
+                            child:
+                                Lottie.asset('assets/animation/no_data.json'));
+                      }
+                    },
+                  ),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
           ),
         ],
       ),

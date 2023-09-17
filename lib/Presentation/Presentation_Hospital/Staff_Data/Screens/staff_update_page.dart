@@ -21,6 +21,12 @@ class _StaffUpdatePageState extends State<StaffUpdatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              StaffDashController.txtStaffClearController;
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back)),
         elevation: 0,
         backgroundColor: ConstraintData.bgColor,
       ),
@@ -105,8 +111,8 @@ class _StaffUpdatePageState extends State<StaffUpdatePage> {
                           ),
                         ),
                       );
-                  StaffDashController.txtStaffClearController;
                   setState(() {});
+                  StaffDashController.txtStaffClearController;
                 },
                 child: const Text("Update"),
               ),

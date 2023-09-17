@@ -36,6 +36,8 @@ Widget loginPhoneWidget({
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   CommonValue.phNumberValue = value.completeNumber;
+                  CommonValue.doctorPhNum = value.number;
+                  CommonValue.patientPhNum = value.number;
                 },
               ),
               const SizedBox(

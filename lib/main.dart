@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       // home: const SplashScreenPage(),
       home: const HospitalDashBoard(),
       // home: const PatientDashPage(),
+      // home: const DoctorDashScreen(),
     );
   }
 }

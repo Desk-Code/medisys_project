@@ -19,8 +19,6 @@ class PatientAddController {
       TextEditingController();
   static final TextEditingController _txtRoomNoController =
       TextEditingController();
-  static final TextEditingController _txtAdmitDateController =
-      TextEditingController();
   static final TextEditingController _txtWordNumberController =
       TextEditingController();
 
@@ -33,7 +31,6 @@ class PatientAddController {
         _txtRelNameController,
         _txtRelativeRelationController,
         _txtRoomNoController,
-        _txtAdmitDateController,
         _txtWordNumberController,
       ];
 
@@ -46,7 +43,6 @@ class PatientAddController {
         _txtRelNameController.clear(),
         _txtRelativeRelationController.clear(),
         _txtRoomNoController.clear(),
-        _txtAdmitDateController.clear(),
         _txtWordNumberController.clear(),
       ];
 }

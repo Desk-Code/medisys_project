@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medisys/Data/firebase/firebase_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Bill_Data/Screens/bill_search_data.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/widgets/common_tile_dash.dart';
@@ -57,7 +58,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
               height: context.screenHeight * 0.1,
             ),
             Text(
-              "Welcome..",
+              "Welcome to ${FirebaseApi.loginUser['hospName']}",
               style: GoogleFonts.lato(
                 color: Colors.black,
                 fontSize: 25,

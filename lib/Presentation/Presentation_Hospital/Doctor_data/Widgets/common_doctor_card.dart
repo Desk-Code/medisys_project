@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 
 Widget commonDoctorCard(
-  BuildContext context,
-) =>
+  BuildContext context, {
+  required String key,
+  required String name,
+  required String mobNum,
+}) =>
     Card(
       margin: EdgeInsets.symmetric(
         horizontal: context.screenWidth * 0.04,
@@ -27,11 +30,11 @@ Widget commonDoctorCard(
                     Icons.person,
                   ),
                 ),
-                const Column(
+                Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.person_pin_circle_outlined),
-                    Text("Doctor key"),
+                    const Icon(Icons.person_pin_circle_outlined),
+                    Text(key),
                   ],
                 ),
               ],
@@ -39,8 +42,8 @@ Widget commonDoctorCard(
             const SizedBox(
               height: 10,
             ),
-            const Text("Doctor Name    : Doctor Name"),
-            const Text("Doctor Mobile  : Doctor Mobile"),
+            Text("Doctor Name    : $name"),
+            Text("Doctor Mobile  : $mobNum"),
           ],
         ),
       ),

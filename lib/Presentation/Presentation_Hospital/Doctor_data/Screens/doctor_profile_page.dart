@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:medisys/Common/widgets/common_text.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Doctor_data/Controller/doctor_update.controller.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Doctor_data/Screens/doctor_update_page.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class DoctorProfilePage extends StatefulWidget {
-  const DoctorProfilePage({super.key});
+  const DoctorProfilePage(
+      {super.key,
+      required this.fullName,
+      required this.mobileNumber,
+      required this.email,
+      required this.gender,
+      required this.age,
+      required this.address,
+      required this.aadharCard,
+      required this.specialist,
+      required this.qualification,
+      required this.selectedKey});
+  final String selectedKey;
+  final String fullName;
+  final String mobileNumber;
+  final String email;
+  final String gender;
+  final String age;
+  final String address;
+  final String aadharCard;
+  final String specialist;
+  final String qualification;
 
   @override
   State<DoctorProfilePage> createState() => _DoctorProfilePageState();
@@ -61,15 +83,15 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      commonText(data: ":- Full Name", size: 17),
-                      commonText(data: ":- Mobile No", size: 17),
-                      commonText(data: ":- Email", size: 17),
-                      commonText(data: ":- Gender", size: 17),
-                      commonText(data: ":- Age", size: 17),
-                      commonText(data: ":- Address", size: 17),
-                      commonText(data: ":- Aadhar Number", size: 17),
-                      commonText(data: ":- Specialist", size: 17),
-                      commonText(data: ":- Qualification", size: 17),
+                      commonText(data: ":- ${widget.fullName}", size: 17),
+                      commonText(data: ":- ${widget.mobileNumber}", size: 17),
+                      commonText(data: ":- ${widget.email}", size: 17),
+                      commonText(data: ":- ${widget.gender}", size: 17),
+                      commonText(data: ":- ${widget.age}", size: 17),
+                      commonText(data: ":- ${widget.address}", size: 17),
+                      commonText(data: ":- ${widget.aadharCard}", size: 17),
+                      commonText(data: ":- ${widget.specialist}", size: 17),
+                      commonText(data: ":- ${widget.qualification}", size: 17),
                     ],
                   ),
                 ],
@@ -89,10 +111,29 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
               ),
             ),
             onPressed: () {
+              DoctorUpdateController.txtDrUpdateController[0].text =
+                  widget.fullName;
+              DoctorUpdateController.txtDrUpdateController[1].text =
+                  widget.mobileNumber;
+              DoctorUpdateController.txtDrUpdateController[2].text =
+                  widget.email;
+              DoctorUpdateController.txtDrUpdateController[3].text =
+                  widget.gender;
+              DoctorUpdateController.txtDrUpdateController[4].text = widget.age;
+              DoctorUpdateController.txtDrUpdateController[5].text =
+                  widget.aadharCard;
+              DoctorUpdateController.txtDrUpdateController[6].text =
+                  widget.address;
+              DoctorUpdateController.txtDrUpdateController[7].text =
+                  widget.specialist;
+              DoctorUpdateController.txtDrUpdateController[8].text =
+                  widget.qualification;
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const DoctorUpdatePage(),
+                    builder: (context) => DoctorUpdatePage(
+                      selectedKey: widget.selectedKey,
+                    ),
                   ));
             },
             child: const Text("Update"),

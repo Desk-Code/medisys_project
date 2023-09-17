@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/text_form_field.dart';
+import 'package:medisys/Data/firebase/doctor/doctor_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Doctor_data/Controller/doctor_add.controller.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Doctor_data/Screens/doctor_search_page.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class DoctorAddPage extends StatefulWidget {
@@ -59,7 +61,7 @@ class _DoctorAddPageState extends State<DoctorAddPage> {
               ),
               commonTextFormField(
                 icon: Icons.group,
-                nameOfField: "Email",
+                nameOfField: "Gender",
                 textEditingController:
                     DoctorAddController.txtDrAddController[3],
               ),
@@ -93,6 +95,9 @@ class _DoctorAddPageState extends State<DoctorAddPage> {
                 textEditingController:
                     DoctorAddController.txtDrAddController[8],
               ),
+              const SizedBox(
+                height: 10,
+              ),
               ElevatedButton(
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(
@@ -103,9 +108,30 @@ class _DoctorAddPageState extends State<DoctorAddPage> {
                   ),
                 ),
                 onPressed: () {
-                  DoctorAddController.txtDrAddClearController();
-                  Navigator.pop(context);
-                  setState(() {});
+                  DoctorApi.setDoctorData(
+                    fullName: DoctorAddController.txtDrAddController[0].text,
+                    mobileNumber:
+                        DoctorAddController.txtDrAddController[1].text,
+                    email: DoctorAddController.txtDrAddController[2].text,
+                    gender: DoctorAddController.txtDrAddController[3].text,
+                    age: DoctorAddController.txtDrAddController[4].text,
+                    aadharNumber:
+                        DoctorAddController.txtDrAddController[5].text,
+                    address: DoctorAddController.txtDrAddController[6].text,
+                    specialist: DoctorAddController.txtDrAddController[7].text,
+                    qualification:
+                        DoctorAddController.txtDrAddController[8].text,
+                  )
+                      .then((value) =>
+                          DoctorAddController.txtDrAddClearController)
+                      .then(
+                        (value) => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DoctorSearchPage(),
+                          ),
+                        ),
+                      );
                 },
                 child: const Text("Submit"),
               ),

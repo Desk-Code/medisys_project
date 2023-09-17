@@ -32,7 +32,7 @@ class ConstraintData {
   // Login info
 
   static const String loginInfo =
-      "Login according to your field \n\n* PATIENT LOGIN Query \n\nLogin first and Patient can only see own data. \n\n* Hospital LOGIN Query \n\nRegister First If you have not part of MediSys for that goto hospital login button and register. Now you are part of MediSys. You are Admin And Handle all Data. \n\n* Doctor LOGIN Query \n\n Doctor can only see own data and update own data Doctor details will be only add by hospital admin staff. \n\nHere Hospital Admin is main to handle all of details. Hospital can add doctor details, patient details etc...";
+      "Login according to your field \n\n* PATIENT LOGIN Query \nLogin first and Patient can only see own data. \n\n* Hospital LOGIN Query \nRegister First If you have not part of MediSys for that goto hospital login button and register. Now you are part of MediSys. You are Admin And Handle all Data. \n\n* Doctor LOGIN Query \nDoctor can only see own data and update own data Doctor details will be only add by hospital admin staff. \n\nHere Hospital Admin is main to handle all of details. Hospital can add doctor details, patient details etc...";
 
   // login Side
 

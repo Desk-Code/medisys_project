@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medisys/Common/widgets/common_value.dart';
 
 Widget textSearchFeild({required TextEditingController controller}) => Padding(
       padding: const EdgeInsets.all(11.0),
@@ -10,5 +11,8 @@ Widget textSearchFeild({required TextEditingController controller}) => Padding(
           ),
           prefixIcon: const Icon(Icons.search),
         ),
+        onChanged: (value) {   
+          CommonValue.search = value;
+        },
       ),
     );

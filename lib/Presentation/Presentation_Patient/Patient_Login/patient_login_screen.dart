@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/common_value.dart';
@@ -72,7 +70,6 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
             loginPhoneWidget(
               context: context,
               onTap: () async {
-                log(FirebaseApiAuth.firebaseVerificationId);
                 await FirebaseApiAuth.sendOtp(
                   context,
                   phNumber: CommonValue.phNumberValue,

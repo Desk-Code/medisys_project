@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/otp_screen.dart';
 import 'package:medisys/Data/firebase/firebase_api_auth.dart';
-import 'package:medisys/Presentation/splash_screen/splash_screen.dart';
+import 'package:medisys/Presentation/Presentation_Doctor/Doctor_DashBoard/Widgets/doctor_dashboard_page.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class DoctorOtpScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _DoctorOtpScreenState extends State<DoctorOtpScreen> {
           onTap: () {
             FirebaseApiAuth.otpVerification(
               context,
-              toNaviagte: (context) => const SplashScreenPage(),
+              toNaviagte: (context) => const DoctorDashScreen(),
             );
           },
         ));

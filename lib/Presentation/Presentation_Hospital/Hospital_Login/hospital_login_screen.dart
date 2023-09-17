@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:medisys/Common/widgets/common_toast.dart';
 import 'package:medisys/Common/widgets/common_value.dart';
+import 'package:medisys/Data/firebase/firebase_api.dart';
 import 'package:medisys/Data/firebase/firebase_api_auth.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Hospital_otp/hospital_otp_screen.dart';
@@ -97,18 +99,20 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          // bool phNumberIsRegistrated =
-                          //     await FirebaseApi.selectData(inputedNumber);
-                          // if (phNumberIsRegistrated) {
-                          await FirebaseApiAuth.sendOtp(
-                            context,
-                            phNumber: CommonValue.phNumberValue,
-                            toNavigate: (context) => const HospitalOtpScreen(),
-                          );
-                          // } else {
-                          //   FlutterToast()
-                          //       .showMessage("Your Data is Not Found !!!");
-                          // }
+                          bool phNumberIsRegistrated =
+                              await FirebaseApi.selectData(inputedNumber);
+                          if (phNumberIsRegistrated) {
+                            // ignore: use_build_context_synchronously
+                            await FirebaseApiAuth.sendOtp(
+                              context,
+                              phNumber: CommonValue.phNumberValue,
+                              toNavigate: (context) =>
+                                  const HospitalOtpScreen(),
+                            );
+                          } else {
+                            FlutterToast()
+                                .showMessage("Your Data is Not Found !!!");
+                          }
                           // log(FirebaseApiAuth.firebaseVerificationId);
                           // await FirebaseApiAuth.sendOtp(
                           //   context,

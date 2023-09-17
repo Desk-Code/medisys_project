@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/hospital_dashboard.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Staff_Data/Controller/staff_dash_controller.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Staff_Data/Screens/staff_search_data.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Staff_Data/Widgets/common_staff_dash.dart';
@@ -21,7 +22,12 @@ class _StaffDashScreenState extends State<StaffDashScreen> {
         backgroundColor: ConstraintData.bgAppBarColor,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HospitalDashBoard(),
+                ),
+                (route) => false);
           },
           icon: const Icon(Icons.arrow_back_rounded),
         ),

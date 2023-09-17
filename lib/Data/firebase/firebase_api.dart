@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 class FirebaseApi {
   static final DatabaseReference db = FirebaseDatabase.instance.ref('User');
+  static Map loginUser = {};
 
   static Future<void> setUserData({
     required String hospName,
@@ -38,6 +39,7 @@ class FirebaseApi {
     // for the fetching ph number value
     for (var element in userData) {
       if (element['mobNum'] == phNumber) {
+        loginUser = element;
         return true;
       }
     }

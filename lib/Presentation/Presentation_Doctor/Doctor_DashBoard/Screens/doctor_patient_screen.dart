@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:medisys/Common/widgets/common_text.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
-import 'package:medisys/Presentation/Presentation_Hospital/Patient_Data/Controller/patient_add.controller.dart';
-import 'package:medisys/Presentation/Presentation_Hospital/Patient_Data/Screens/patient_update_page.dart';
+import 'package:medisys/Presentation/Presentation_Doctor/Doctor_DashBoard/Screens/doctor_add_payment.dart';
 import 'package:medisys/Util/constraint.dart';
 
-class PatientProfilePage extends StatefulWidget {
-  const PatientProfilePage(
+class DoctorPatientScreen extends StatefulWidget {
+  const DoctorPatientScreen(
       {super.key,
       required this.patientName,
-      required this.mobileNumber,
+      required this.mobileNum,
       required this.gender,
-      required this.bloodGroup,
+      required this.bloddGroup,
       required this.age,
-      required this.doctorName,
       required this.relativeName,
       required this.relativeRelation,
-      required this.roomNo,
       required this.admitDate,
+      required this.roomNo,
       required this.wardNo,
       required this.selectedKey});
   final String selectedKey;
   final String patientName;
-  final String mobileNumber;
+  final String mobileNum;
   final String gender;
-  final String bloodGroup;
+  final String bloddGroup;
   final String age;
-  final String doctorName;
   final String relativeName;
   final String relativeRelation;
-  final String roomNo;
   final String admitDate;
+  final String roomNo;
   final String wardNo;
 
   @override
-  State<PatientProfilePage> createState() => _PatientProfilePageState();
+  State<DoctorPatientScreen> createState() => _DoctorPatientScreenState();
 }
 
-class _PatientProfilePageState extends State<PatientProfilePage> {
+class _DoctorPatientScreenState extends State<DoctorPatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +75,6 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                       commonText(data: "Gender", size: 17),
                       commonText(data: "Blood Group", size: 17),
                       commonText(data: "Age", size: 17),
-                      commonText(data: "Doctor Ref", size: 17),
                       commonText(data: "Relative Name", size: 17),
                       commonText(data: "Relative Relation", size: 17),
                       commonText(data: "Admit Date", size: 17),
@@ -90,11 +86,10 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       commonText(data: ":- ${widget.patientName}", size: 17),
-                      commonText(data: ":- ${widget.mobileNumber}", size: 17),
+                      commonText(data: ":- ${widget.mobileNum}", size: 17),
                       commonText(data: ":- ${widget.gender}", size: 17),
-                      commonText(data: ":- ${widget.bloodGroup}", size: 17),
+                      commonText(data: ":- ${widget.bloddGroup}", size: 17),
                       commonText(data: ":- ${widget.age}", size: 17),
-                      commonText(data: ":- ${widget.doctorName}", size: 17),
                       commonText(data: ":- ${widget.relativeName}", size: 17),
                       commonText(
                           data: ":- ${widget.relativeRelation}", size: 17),
@@ -120,32 +115,15 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
               ),
             ),
             onPressed: () {
-              PatientAddController.txtPatientAddController[0].text =
-                  widget.patientName;
-              PatientAddController.txtPatientAddController[1].text =
-                  widget.mobileNumber;
-              PatientAddController.txtPatientAddController[2].text =
-                  widget.gender;
-              PatientAddController.txtPatientAddController[3].text =
-                  widget.bloodGroup;
-              PatientAddController.txtPatientAddController[4].text = widget.age;
-              PatientAddController.txtPatientAddController[5].text =
-                  widget.relativeName;
-              PatientAddController.txtPatientAddController[6].text =
-                  widget.relativeRelation;
-              PatientAddController.txtPatientAddController[7].text =
-                  widget.roomNo;
-              PatientAddController.txtPatientAddController[8].text =
-                  widget.wardNo;
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PatientUpdatePage(
+                    builder: (context) => DoctorAddPayment(
                       selectedKey: widget.selectedKey,
                     ),
                   ));
             },
-            child: const Text("Update"),
+            child: const Text("Add Disease and Payment"),
           ),
           const SizedBox(
             height: 20,

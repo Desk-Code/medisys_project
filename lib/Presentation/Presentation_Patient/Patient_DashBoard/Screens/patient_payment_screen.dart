@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/common_text.dart';
 import 'package:medisys/Common/widgets/common_toast.dart';
+import 'package:medisys/Common/widgets/common_value.dart';
+import 'package:medisys/Data/firebase/patient/patient_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
 import 'package:medisys/Util/constraint.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -130,15 +132,18 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
     );
   }
 
-  void paymentSuccess(PaymentSuccessResponse paymentSuccessResponse) {
-    FlutterToast().showMessage("${paymentSuccessResponse.orderId}");
+  void paymentSuccess(PaymentSuccessResponse paymentSuccessResponse) async {
+    CommonValue.payablePatientAmount -=
+        double.parse(_textEditingController.text);
+    await PatientApi.billPayment(
+      key: CommonValue.patientKey,
+      payAmount: CommonValue.payablePatientAmount.toString(),
+    );
+    _textEditingController.clear();
     FlutterToast().showMessage("${paymentSuccessResponse.paymentId}");
-    FlutterToast().showMessage("${paymentSuccessResponse.signature}");
   }
 
   void paymentFailure(PaymentFailureResponse paymentFailureResponse) {
-    FlutterToast().showMessage("${paymentFailureResponse.code}");
-    FlutterToast().showMessage("${paymentFailureResponse.error}");
     FlutterToast().showMessage("${paymentFailureResponse.message}");
   }
 }

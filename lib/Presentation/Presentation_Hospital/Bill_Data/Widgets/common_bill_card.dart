@@ -3,7 +3,9 @@ import 'package:medisys/Extention/build_context_extention.dart';
 
 Widget commonBillCard(
   BuildContext context, {
-  bool paymentIsDone = false,
+  required String name,
+  required String mobileNumber,
+  required String amt,
 }) =>
     Card(
       margin: EdgeInsets.symmetric(
@@ -32,17 +34,16 @@ Widget commonBillCard(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.currency_rupee_sharp),
-                    const Text("₹ 0"),
-                    Text((paymentIsDone) ? "Completed" : "UnCompleted"),
+                    Text("₹ $amt"),
                   ],
                 ),
               ],
             ),
             const SizedBox(
-              height: 6,
+              height: 10,
             ),
-            const Text("Patient Name    : Patient Name"),
-            const Text("Patient Mobile  : Patient Mobile"),
+            Text("Patient Name    : $name"),
+            Text("Patient Mobile  : $mobileNumber"),
           ],
         ),
       ),

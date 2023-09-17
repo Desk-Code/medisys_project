@@ -2,26 +2,25 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medisys/Presentation/Presentation_Patient/Patient_DashBoard/Screens/patient_home_screen.dart';
-import 'package:medisys/Presentation/Presentation_Patient/Patient_DashBoard/Screens/patient_payment_screen.dart';
+import 'package:medisys/Presentation/Presentation_Doctor/Doctor_DashBoard/Screens/doctor_dashboard_screen.dart';
+import 'package:medisys/Presentation/Presentation_Doctor/Doctor_DashBoard/Screens/doctor_home_screen.dart';
 import 'package:medisys/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:medisys/Util/constraint.dart';
 
-class PatientDashPage extends StatefulWidget {
-  const PatientDashPage({super.key});
+class DoctorDashScreen extends StatefulWidget {
+  const DoctorDashScreen({super.key});
 
   @override
-  State<PatientDashPage> createState() => _PatientDashPageState();
+  State<DoctorDashScreen> createState() => _DoctorDashScreenState();
 }
 
-class _PatientDashPageState extends State<PatientDashPage> {
+class _DoctorDashScreenState extends State<DoctorDashScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   List<Widget> screenList = [
-    const PatientHomeScreen(),
-    const PatientPaymentScreen(),
+    const DoctorHome(),
+    const DoctorDashboard(),
     Container(),
   ];
-
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class _PatientDashPageState extends State<PatientDashPage> {
         gapLocation: GapLocation.none,
         icons: const [
           Icons.home,
-          Icons.currency_rupee_sharp,
+          Icons.dashboard,
           Icons.logout,
         ],
         activeIndex: _selectedIndex,

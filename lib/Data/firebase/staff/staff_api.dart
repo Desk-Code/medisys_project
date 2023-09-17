@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:medisys/Data/firebase/firebase_api.dart';
 
 class StaffApi {
   static final DatabaseReference db = FirebaseDatabase.instance.ref('Staff');
@@ -15,6 +16,7 @@ class StaffApi {
     String key = db.push().key!;
     await db.child(key).set({
       'key': key,
+      'hospitalRef': FirebaseApi.loginUser['mobNum'],
       'fullName': fullName,
       'mobileNumber': mobileNumber,
       'gender': gender,
@@ -34,8 +36,10 @@ class StaffApi {
     });
     List<Map> staffData = [];
     for (var ele in userData) {
-      if (ele['staffSection'] == staffSection) {
-        staffData.add(ele);
+      if (ele['hospitalRef'] == FirebaseApi.loginUser['mobNum']) {
+        if (ele['staffSection'] == staffSection) {
+          staffData.add(ele);
+        }
       }
     }
     return staffData;
@@ -62,6 +66,7 @@ class StaffApi {
       },
     );
   }
+
   static Future<void> staffDeleteData({required String key}) async {
     await db.child(key).remove();
   }

@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/common_text.dart';
 import 'package:medisys/Common/widgets/common_toast.dart';
+import 'package:medisys/Data/firebase/patient/patient_api.dart';
 import 'package:medisys/Extention/build_context_extention.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Bill_Data/Screens/bill_search_data.dart';
 import 'package:medisys/Util/constraint.dart';
 
 class BillUpdatePage extends StatefulWidget {
-  const BillUpdatePage({super.key});
+  const BillUpdatePage(
+      {super.key, required this.selectedKey, required this.currentAmt});
+  final String selectedKey;
+  final String currentAmt;
 
   @override
   State<BillUpdatePage> createState() => _BillUpdatePageState();
@@ -15,6 +20,12 @@ class BillUpdatePage extends StatefulWidget {
 class _BillUpdatePageState extends State<BillUpdatePage> {
   final TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    _textEditingController.text = widget.currentAmt;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,9 +96,23 @@ class _BillUpdatePageState extends State<BillUpdatePage> {
                           height: 10,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            FlutterToast().showMessage("Update Completed");
-                            Navigator.pop(context);
+                          onTap: () async {
+                            double amt =
+                                double.parse(_textEditingController.text);
+                            await PatientApi.billPayment(
+                              key: widget.selectedKey,
+                              payAmount: amt.toString(),
+                            ).then((value) => {
+                                  _textEditingController.clear(),
+                                  FlutterToast()
+                                      .showMessage("Update Completed"),
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BillSearchData(),
+                                      )),
+                                });
                           },
                           child: Container(
                             height: context.screenHeight * 0.06,
