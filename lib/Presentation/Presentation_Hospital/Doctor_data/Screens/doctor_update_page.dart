@@ -91,36 +91,40 @@ class _DoctorUpdatePageState extends State<DoctorUpdatePage> {
                   ),
                 ),
                 onPressed: () async {
-                  await DoctorApi.staffupdateData(
-                    key: widget.selectedKey,
-                    fullName:
-                        DoctorUpdateController.txtDrUpdateController[0].text,
-                    mobileNumber:
-                        DoctorUpdateController.txtDrUpdateController[1].text,
-                    email: DoctorUpdateController.txtDrUpdateController[2].text,
-                    gender:
-                        DoctorUpdateController.txtDrUpdateController[3].text,
-                    age: DoctorUpdateController.txtDrUpdateController[4].text,
-                    aadharNumber:
-                        DoctorUpdateController.txtDrUpdateController[5].text,
-                    address:
-                        DoctorUpdateController.txtDrUpdateController[6].text,
-                    specialist:
-                        DoctorUpdateController.txtDrUpdateController[7].text,
-                    qualification:
-                        DoctorUpdateController.txtDrUpdateController[8].text,
-                  )
-                      .then((value) =>
-                          DoctorUpdateController.txtDrUpdateClearController)
-                      .then((value) => Navigator.pop(context))
-                      .then(
-                        (value) => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DoctorSearchPage(),
+                  if (DoctorUpdateController.globalKey.currentState!
+                      .validate()) {
+                    await DoctorApi.staffupdateData(
+                      key: widget.selectedKey,
+                      fullName:
+                          DoctorUpdateController.txtDrUpdateController[0].text,
+                      mobileNumber:
+                          DoctorUpdateController.txtDrUpdateController[1].text,
+                      email:
+                          DoctorUpdateController.txtDrUpdateController[2].text,
+                      gender:
+                          DoctorUpdateController.txtDrUpdateController[3].text,
+                      age: DoctorUpdateController.txtDrUpdateController[4].text,
+                      aadharNumber:
+                          DoctorUpdateController.txtDrUpdateController[5].text,
+                      address:
+                          DoctorUpdateController.txtDrUpdateController[6].text,
+                      specialist:
+                          DoctorUpdateController.txtDrUpdateController[7].text,
+                      qualification:
+                          DoctorUpdateController.txtDrUpdateController[8].text,
+                    )
+                        .then((value) =>
+                            DoctorUpdateController.txtDrUpdateClearController)
+                        .then((value) => Navigator.pop(context))
+                        .then(
+                          (value) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DoctorSearchPage(),
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                  }
                 },
                 child: const Text("Update"),
               ),

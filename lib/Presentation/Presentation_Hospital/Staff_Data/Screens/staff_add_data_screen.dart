@@ -97,27 +97,29 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   ),
                 ),
                 onPressed: () async {
-                  await StaffApi.setStaffData(
-                    fullName: StaffDashController.txtStaffController[0].text,
-                    mobileNumber:
-                        StaffDashController.txtStaffController[1].text,
-                    gender: StaffDashController.txtStaffController[2].text,
-                    age: StaffDashController.txtStaffController[3].text,
-                    staffSection: widget.staffSection,
-                    aadharNumber:
-                        StaffDashController.txtStaffController[4].text,
-                    address: StaffDashController.txtStaffController[5].text,
-                  ).then(
-                    (value) => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StaffSearchPage(
-                          selectedStaff: widget.staffSection,
+                  if (StaffDashController.globalKey.currentState!.validate()) {
+                    await StaffApi.setStaffData(
+                      fullName: StaffDashController.txtStaffController[0].text,
+                      mobileNumber:
+                          StaffDashController.txtStaffController[1].text,
+                      gender: StaffDashController.txtStaffController[2].text,
+                      age: StaffDashController.txtStaffController[3].text,
+                      staffSection: widget.staffSection,
+                      aadharNumber:
+                          StaffDashController.txtStaffController[4].text,
+                      address: StaffDashController.txtStaffController[5].text,
+                    ).then(
+                      (value) => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StaffSearchPage(
+                            selectedStaff: widget.staffSection,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                  StaffDashController.txtStaffClearController;
+                    );
+                    StaffDashController.txtStaffClearController;
+                  }
                 },
                 child: const Text("Submit"),
               ),

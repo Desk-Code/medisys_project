@@ -49,14 +49,16 @@ class _DoctorAddPaymentState extends State<DoctorAddPayment> {
                   ),
                 ),
                 onPressed: () async {
-                  await PatientApi.updateBillAndDisease(
-                          key: widget.selectedKey,
-                          disease: _txtDiseaseController.text,
-                          payAmount: _txtPaymentController.text)
-                      .then((value) {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  });
+                  if (globalKey.currentState!.validate()) {
+                    await PatientApi.updateBillAndDisease(
+                            key: widget.selectedKey,
+                            disease: _txtDiseaseController.text,
+                            payAmount: _txtPaymentController.text)
+                        .then((value) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
+                  }
                 },
                 child: const Text("Update"),
               ),

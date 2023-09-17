@@ -157,33 +157,35 @@ class _PatientAddPageState extends State<PatientAddPage> {
                   ),
                 ),
                 onPressed: () async {
-                  await PatientApi.setPatientData(
-                          name: PatientAddController
-                              .txtPatientAddController[0].text,
-                          mobileNumber: PatientAddController
-                              .txtPatientAddController[1].text,
-                          gender: PatientAddController
-                              .txtPatientAddController[2].text,
-                          bloodGroup: PatientAddController
-                              .txtPatientAddController[3].text,
-                          age: PatientAddController
-                              .txtPatientAddController[4].text,
-                          doctorName: doctorRef!,
-                          relativeName: PatientAddController
-                              .txtPatientAddController[5].text,
-                          relationRelative: PatientAddController
-                              .txtPatientAddController[6].text,
-                          roomNo: PatientAddController
-                              .txtPatientAddController[7].text,
-                          wardNo: PatientAddController
-                              .txtPatientAddController[8].text)
-                      .then((value) =>
-                          PatientAddController.txtPatientAddClearController)
-                      .then((value) => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PatientSearchPage(),
-                          )));
+                  if (PatientAddController.globalKey.currentState!.validate()) {
+                    await PatientApi.setPatientData(
+                            name: PatientAddController
+                                .txtPatientAddController[0].text,
+                            mobileNumber: PatientAddController
+                                .txtPatientAddController[1].text,
+                            gender: PatientAddController
+                                .txtPatientAddController[2].text,
+                            bloodGroup: PatientAddController
+                                .txtPatientAddController[3].text,
+                            age: PatientAddController
+                                .txtPatientAddController[4].text,
+                            doctorName: doctorRef!,
+                            relativeName: PatientAddController
+                                .txtPatientAddController[5].text,
+                            relationRelative: PatientAddController
+                                .txtPatientAddController[6].text,
+                            roomNo: PatientAddController
+                                .txtPatientAddController[7].text,
+                            wardNo: PatientAddController
+                                .txtPatientAddController[8].text)
+                        .then((value) =>
+                            PatientAddController.txtPatientAddClearController)
+                        .then((value) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PatientSearchPage(),
+                            )));
+                  }
                 },
                 child: const Text("Submit"),
               ),

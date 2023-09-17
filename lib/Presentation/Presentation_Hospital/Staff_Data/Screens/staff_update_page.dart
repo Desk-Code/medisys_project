@@ -85,34 +85,36 @@ class _StaffUpdatePageState extends State<StaffUpdatePage> {
                   ),
                 ),
                 onPressed: () async {
-                  await StaffApi.staffupdateData(
-                          key: widget.selectedKey,
-                          fullName:
-                              StaffDashController.txtStaffController[0].text,
-                          mobileNumber:
-                              StaffDashController.txtStaffController[1].text,
-                          gender:
-                              StaffDashController.txtStaffController[2].text,
-                          age: StaffDashController.txtStaffController[3].text,
-                          aadharNumber:
-                              StaffDashController.txtStaffController[4].text,
-                          address:
-                              StaffDashController.txtStaffController[5].text)
-                      .then((value) =>
-                          StaffDashController.txtStaffClearController)
-                      .then((value) => Navigator.pop(context))
-                      .then(
-                        (value) => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StaffSearchPage(
-                              selectedStaff: widget.selectedStaff,
+                  if (StaffDashController.globalKey.currentState!.validate()) {
+                    await StaffApi.staffupdateData(
+                            key: widget.selectedKey,
+                            fullName:
+                                StaffDashController.txtStaffController[0].text,
+                            mobileNumber:
+                                StaffDashController.txtStaffController[1].text,
+                            gender:
+                                StaffDashController.txtStaffController[2].text,
+                            age: StaffDashController.txtStaffController[3].text,
+                            aadharNumber:
+                                StaffDashController.txtStaffController[4].text,
+                            address:
+                                StaffDashController.txtStaffController[5].text)
+                        .then((value) =>
+                            StaffDashController.txtStaffClearController)
+                        .then((value) => Navigator.pop(context))
+                        .then(
+                          (value) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StaffSearchPage(
+                                selectedStaff: widget.selectedStaff,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                  setState(() {});
-                  StaffDashController.txtStaffClearController;
+                        );
+                    setState(() {});
+                    StaffDashController.txtStaffClearController;
+                  }
                 },
                 child: const Text("Update"),
               ),

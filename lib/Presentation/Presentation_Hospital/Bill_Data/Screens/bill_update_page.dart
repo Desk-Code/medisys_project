@@ -97,22 +97,24 @@ class _BillUpdatePageState extends State<BillUpdatePage> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            double amt =
-                                double.parse(_textEditingController.text);
-                            await PatientApi.billPayment(
-                              key: widget.selectedKey,
-                              payAmount: amt.toString(),
-                            ).then((value) => {
-                                  _textEditingController.clear(),
-                                  FlutterToast()
-                                      .showMessage("Update Completed"),
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const BillSearchData(),
-                                      )),
-                                });
+                            if (_globalKey.currentState!.validate()) {
+                              double amt =
+                                  double.parse(_textEditingController.text);
+                              await PatientApi.billPayment(
+                                key: widget.selectedKey,
+                                payAmount: amt.toString(),
+                              ).then((value) => {
+                                    _textEditingController.clear(),
+                                    FlutterToast()
+                                        .showMessage("Update Completed"),
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const BillSearchData(),
+                                        )),
+                                  });
+                            }
                           },
                           child: Container(
                             height: context.screenHeight * 0.06,

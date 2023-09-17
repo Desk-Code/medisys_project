@@ -6,6 +6,7 @@ class CommonValue {
 
   static String doctorPhNum = '';
   static String patientPhNum = '';
+  static String inputedNumber = '';
 
   static double payablePatientAmount = 0;
   static String patientDisease = '';

@@ -18,7 +18,6 @@ class HospitalLoginScreen extends StatefulWidget {
 }
 
 class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
-  String inputedNumber = '';
   @override
   void initState() {
     super.initState();
@@ -91,7 +90,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
                           CommonValue.phNumberValue = value.completeNumber;
-                          inputedNumber = value.number;
+                          CommonValue.inputedNumber = value.number;
                         },
                       ),
                       const SizedBox(
@@ -100,7 +99,8 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                       GestureDetector(
                         onTap: () async {
                           bool phNumberIsRegistrated =
-                              await FirebaseApi.selectData(inputedNumber);
+                              await FirebaseApi.selectData(
+                                  CommonValue.inputedNumber);
                           if (phNumberIsRegistrated) {
                             // ignore: use_build_context_synchronously
                             await FirebaseApiAuth.sendOtp(

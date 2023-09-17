@@ -93,22 +93,24 @@ class _HospitalRegisterScreenState extends State<HospitalRegisterScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if (RegController.txtRegController[5].text ==
-                      RegController.txtRegController[6].text) {
-                    await FirebaseApi.setUserData(
-                      hospName: RegController.txtRegController[0].text,
-                      mobNum: RegController.txtRegController[1].text,
-                      email: RegController.txtRegController[2].text,
-                      address: RegController.txtRegController[3].text,
-                      upiId: RegController.txtRegController[4].text,
-                      pass: RegController.txtRegController[5].text,
-                    ).then((value) {
-                      RegController.txtRegControllerClear;
-                      Navigator.pop(context);
-                    });
-                  } else {
-                    FlutterToast().showMessage(
-                        "Password and current password does not same. please enter right password!");
+                  if (RegController.globalKey.currentState!.validate()) {
+                    if (RegController.txtRegController[5].text ==
+                        RegController.txtRegController[6].text) {
+                      await FirebaseApi.setUserData(
+                        hospName: RegController.txtRegController[0].text,
+                        mobNum: RegController.txtRegController[1].text,
+                        email: RegController.txtRegController[2].text,
+                        address: RegController.txtRegController[3].text,
+                        upiId: RegController.txtRegController[4].text,
+                        pass: RegController.txtRegController[5].text,
+                      ).then((value) {
+                        RegController.txtRegControllerClear;
+                        Navigator.pop(context);
+                      });
+                    } else {
+                      FlutterToast().showMessage(
+                          "Password and current password does not same. please enter right password!");
+                    }
                   }
                 },
                 child: Container(

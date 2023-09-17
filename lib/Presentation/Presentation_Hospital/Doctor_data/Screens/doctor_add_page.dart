@@ -108,30 +108,33 @@ class _DoctorAddPageState extends State<DoctorAddPage> {
                   ),
                 ),
                 onPressed: () {
-                  DoctorApi.setDoctorData(
-                    fullName: DoctorAddController.txtDrAddController[0].text,
-                    mobileNumber:
-                        DoctorAddController.txtDrAddController[1].text,
-                    email: DoctorAddController.txtDrAddController[2].text,
-                    gender: DoctorAddController.txtDrAddController[3].text,
-                    age: DoctorAddController.txtDrAddController[4].text,
-                    aadharNumber:
-                        DoctorAddController.txtDrAddController[5].text,
-                    address: DoctorAddController.txtDrAddController[6].text,
-                    specialist: DoctorAddController.txtDrAddController[7].text,
-                    qualification:
-                        DoctorAddController.txtDrAddController[8].text,
-                  )
-                      .then((value) =>
-                          DoctorAddController.txtDrAddClearController)
-                      .then(
-                        (value) => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DoctorSearchPage(),
+                  if (DoctorAddController.globalKey.currentState!.validate()) {
+                    DoctorApi.setDoctorData(
+                      fullName: DoctorAddController.txtDrAddController[0].text,
+                      mobileNumber:
+                          DoctorAddController.txtDrAddController[1].text,
+                      email: DoctorAddController.txtDrAddController[2].text,
+                      gender: DoctorAddController.txtDrAddController[3].text,
+                      age: DoctorAddController.txtDrAddController[4].text,
+                      aadharNumber:
+                          DoctorAddController.txtDrAddController[5].text,
+                      address: DoctorAddController.txtDrAddController[6].text,
+                      specialist:
+                          DoctorAddController.txtDrAddController[7].text,
+                      qualification:
+                          DoctorAddController.txtDrAddController[8].text,
+                    )
+                        .then((value) =>
+                            DoctorAddController.txtDrAddClearController)
+                        .then(
+                          (value) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DoctorSearchPage(),
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                  }
                 },
                 child: const Text("Submit"),
               ),

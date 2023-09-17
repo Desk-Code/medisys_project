@@ -45,4 +45,26 @@ class FirebaseApi {
     }
     return false;
   }
+
+  static Future<Map> selectProfileData(String phNumber) async {
+    Map data =
+        await db.once().then((value) => value.snapshot.value as Map? ?? {});
+
+    // for the fetching all data from the list
+    List<Map> userData = [];
+    data.forEach(
+      (key, value) {
+        userData.add(value);
+      },
+    );
+
+    // for the fetching ph number value
+    Map profileData = {};
+    for (var element in userData) {
+      if (element['mobNum'] == phNumber) {
+        profileData = element;
+      }
+    }
+    return profileData;
+  }
 }

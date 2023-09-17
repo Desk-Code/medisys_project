@@ -42,19 +42,6 @@ class _HospitalOtpScreenState extends State<HospitalOtpScreen> {
             context,
             toNaviagte: (context) => const HospitalDashBoard(),
           );
-
-          // AuthCredential credential = PhoneAuthProvider.credential(
-          //   verificationId: widget.verificationId,
-          //   smsCode: CommonValue.otpPinValue,
-          // );
-          // _auth.signInWithCredential(credential).then(
-          //       (value) => Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => const SplashScreenPage(),
-          //         ),
-          //       ),
-          //     );
         },
       ),
     );

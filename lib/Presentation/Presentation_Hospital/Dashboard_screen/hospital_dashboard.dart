@@ -7,6 +7,7 @@ import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/widg
 import 'package:medisys/Presentation/Presentation_Hospital/Dashboard_screen/widgets/drawer_screen.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Doctor_data/Screens/doctor_search_page.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Patient_Data/Screens/patient_search_page.dart';
+import 'package:medisys/Presentation/Presentation_Hospital/Profile_Page/hospital_profile.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Staff_Data/Screens/staff_dash_screen.dart';
 import 'package:medisys/Util/constraint.dart';
 
@@ -35,9 +36,11 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
         }),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.dashboard),
-          ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const HospProfilePage(),));
+              },
+              icon: const Icon(Icons.dashboard),
+           ),
         ],
         title: Text(
           ConstraintData.appName,
@@ -49,7 +52,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
         ),
         centerTitle: true,
       ),
-      drawer: dashDrawer(),
+      drawer: dashDrawer(context),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

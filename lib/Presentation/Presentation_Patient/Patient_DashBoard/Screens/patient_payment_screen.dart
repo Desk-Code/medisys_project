@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medisys/Common/widgets/common_text.dart';
 import 'package:medisys/Common/widgets/common_toast.dart';
@@ -82,6 +83,11 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                     children: [
                       TextFormField(
                         controller: _textEditingController,
+                        validator: MultiValidator([
+                          RequiredValidator(
+                              errorText: "Enter Amout to you have Pay"),
+                        ]),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.currency_rupee),
                           hintText: "Enter Amount",
@@ -95,11 +101,13 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          _razorPay.open(options);
-                          _razorPay.on(
-                              Razorpay.EVENT_PAYMENT_SUCCESS, paymentSuccess);
-                          _razorPay.on(
-                              Razorpay.EVENT_PAYMENT_ERROR, paymentFailure);
+                          if (_globalKey.currentState!.validate()) {
+                            _razorPay.open(options);
+                            _razorPay.on(
+                                Razorpay.EVENT_PAYMENT_SUCCESS, paymentSuccess);
+                            _razorPay.on(
+                                Razorpay.EVENT_PAYMENT_ERROR, paymentFailure);
+                          }
                         },
                         child: Container(
                           height: context.screenHeight * 0.06,

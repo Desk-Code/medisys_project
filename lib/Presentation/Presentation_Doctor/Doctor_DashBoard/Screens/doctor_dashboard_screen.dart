@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medisys/Common/widgets/common_value.dart';
-import 'package:medisys/Common/widgets/text_search_field.dart';
 import 'package:medisys/Data/firebase/patient/patient_api.dart';
 import 'package:medisys/Presentation/Presentation_Doctor/Doctor_DashBoard/Screens/doctor_patient_screen.dart';
 import 'package:medisys/Presentation/Presentation_Hospital/Patient_Data/Widget/common_patient_card.dart';
@@ -32,8 +31,21 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        textSearchFeild(
-          controller: _txtSearchController,
+        Padding(
+          padding: const EdgeInsets.all(11.0),
+          child: TextField(
+            controller: _txtSearchController,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              prefixIcon: const Icon(Icons.search),
+            ),
+            onChanged: (value) {
+              CommonValue.search = value;
+              setState(() {});
+            },
+          ),
         ),
         FutureBuilder(
           future: futurePatientData,
