@@ -111,15 +111,13 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                         ),
                       );
                     } else {
-                      return SingleChildScrollView(
-                          padding: const EdgeInsets.only(top: 70),
-                          child: Lottie.asset('assets/animation/no_data.json'));
+                      return Container();
                     }
                   },
                 ),
               );
             } else {
-              return const CircularProgressIndicator();
+              return Lottie.asset('assets/animation/no_data.json');
             }
           },
         ),

@@ -21,6 +21,7 @@ class StaffSearchPage extends StatefulWidget {
 class _StaffSearchPageState extends State<StaffSearchPage> {
   late Future<List<Map>> futureStaffData;
   late String staffSection;
+  int? searchTileCount;
   @override
   void initState() {
     staffSection = widget.selectedStaff;
@@ -163,16 +164,13 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
                           ),
                         );
                       } else {
-                        return SingleChildScrollView(
-                            padding: const EdgeInsets.only(top: 70),
-                            child:
-                                Lottie.asset('assets/animation/no_data.json'));
+                        return Container();
                       }
                     },
                   ),
                 );
               } else {
-                return const CircularProgressIndicator();
+                return Lottie.asset('assets/animation/no_data.json');
               }
             },
           ),

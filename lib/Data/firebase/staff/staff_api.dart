@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:medisys/Common/widgets/common_value.dart';
 import 'package:medisys/Data/firebase/firebase_api.dart';
 
 class StaffApi {
@@ -39,6 +40,29 @@ class StaffApi {
       if (ele['hospitalRef'] == FirebaseApi.loginUser['mobNum']) {
         if (ele['staffSection'] == staffSection) {
           staffData.add(ele);
+        }
+      }
+    }
+    return staffData;
+  }
+
+  static Future<List<Map>> selectSearchData(String staffSection) async {
+    Map data =
+        await db.once().then((value) => value.snapshot.value as Map? ?? {});
+    List<Map> userData = [];
+    data.forEach((key, value) {
+      userData.add(value);
+    });
+    List<Map> staffData = [];
+    for (var ele in userData) {
+      if (ele['hospitalRef'] == FirebaseApi.loginUser['mobNum']) {
+        if (ele['staffSection'] == staffSection) {
+          if (ele['fullName']
+              .toString()
+              .toLowerCase()
+              .contains(CommonValue.search.toLowerCase())) {
+            staffData.add(ele);
+          }
         }
       }
     }
